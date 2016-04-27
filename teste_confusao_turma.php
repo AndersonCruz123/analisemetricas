@@ -22,8 +22,9 @@
   $Nquestion = $linha->cont;
 
   $cont = 0;
-  $nome_aluno = [];
-  $resultado_metrica = [];
+  $aluno = array(array());
+  $questionsTurma = array_fill(0, $Nquestion, 0);
+  //$resultado_metrica = [];
 
   // Calcula a metrica de confusao para cada aluno, e passa o resultado para um vetor;\\
   while ($linha = mysql_fetch_object($ss_turma)){
@@ -62,6 +63,7 @@
       }
 
       $questions = array_fill(0, $Nquestion, 1);
+
       $q = [];
       $i = 0;
       //lendo as linhas\\
@@ -74,6 +76,7 @@
             for ($j=0; $j < count($q); $j++) { 
               if($q[$j] == $questoes)
                 $questions[$j]++; //conta as repetições
+   //         	$questionsTurma[$j]++;
             }                  
           }
         }
@@ -100,19 +103,43 @@
       $duvida = 1-($duvida/ log($Nquestion));
 
       //echo "<br><br>Aluno: ".$nome."<br>";
-      $nome_aluno[$cont] = $nome;
-      //echo "Questions: ";
-      //print_r($questions);
+      $aluno[$cont][0] = $nome;
+  //    echo $nome." ";
+   //   print_r($questions);
+     // echo " ".$duv."</br>";
+      for($i=0; $i<count($questionsTurma); $i++){
+      	$questionsTurma[$i] = $questionsTurma[$i] + $questions[$i];
+      }
       //echo "<br>";
 
       //echo "Nº Questoes: ".$Nquestion."<br>";
       $duv = abs(number_format($duvida, 4, '.', ','));
 
       //echo "Resultado: ".abs(number_format($duvida, 4, '.', ','));// resultado do calculo da metrica
-      $resultado_metrica[$cont] = $duv;
+      $aluno[$cont][1] = $duv;
       $cont++;
   }
 
+  //Ordenação dos resultados método bubble sort
+  for($i = 0; $i < count($aluno); $i++)
+  {
+     for($j = 0; $j < count($aluno) - 1; $j++)
+     {
+       if($aluno[$j][1] < $aluno[$j + 1][1])
+       {
+         $aux = $aluno[$j][0];
+         $aux1 = $aluno[$j][1];
+
+         $aluno[$j][0] = $aluno[$j + 1][0];
+         $aluno[$j][1] = $aluno[$j + 1][1];         
+
+         $aluno[$j + 1][0] = $aux;
+         $aluno[$j + 1][1] = $aux1;
+       }
+     }
+  }
+
+  //rsort($questionsTurma);
   //print_r($nome_aluno);
   //print_r($resultado_metrica);
   //echo "<br><br>";
@@ -126,24 +153,41 @@
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {";
   $html = $html." 
-                  var dataCategoria = google.visualization.arrayToDataTable([
-                  ['Nome', 'Indice de confusao'],";
-                  for($i = 0; $i < count($nome_aluno);$i++){
-                     $html.="['".$nome_aluno[$i]."',".$resultado_metrica[$i]."],";
+                  var dataConfusaoAluno = google.visualization.arrayToDataTable([
+                  ['Nome', 'Indice de confusão'],";
+                  for($i = 0; $i < count($aluno);$i++){
+                     $html.="['".$aluno[$i][0]."',".$aluno[$i][1]."],";
                   }
   $html.=" ]);              
-                  var optionsCategoria = {
-                    title: 'Nivel de Confusao por Aluno'
+                  var optionsAluno = {
+                    title: 'Nível de Confusão por Aluno'                 
                   };
 
-                  var chartCategoria = new google.visualization.BarChart(document.getElementById('Nome'));
+                  var chartConfusaoAluno = new google.visualization.BarChart(document.getElementById('confusaoAluno'));
+                  chartConfusaoAluno.draw(dataConfusaoAluno, optionsAluno);
 
-                  chartCategoria.draw(dataCategoria, optionsCategoria);
+
+                  var dataQuestaoTurma = google.visualization.arrayToDataTable([
+                  ['Questão', 'Quantidade'],";
+                  for($i = 0; $i < count($questionsTurma);$i++){
+                     $html.="['".$i."',".$questionsTurma[$i]."],";
+                  }
+  $html.=" ]);              
+                  var optionsQuestaoTurma = {
+                    title: 'Quantidade de questão respondida pelos alunos'
+                  };
+
+                  var chartQuestaoTurma = new google.visualization.BarChart(document.getElementById('QuestaoTurma'));
+                  chartQuestaoTurma.draw(dataQuestaoTurma, optionsQuestaoTurma);
+
               }
           </script>
+
           </head>
           <body>
-            <div id='Nome' style='width: 1000px; height: 1500px;'></div>
+            <div id='confusaoAluno' style='width: 1000px; height: 1500px;'></div>
+            <div id='QuestaoTurma' style='width: 750px; height: 750px;'></div>
+
           </body>
           </html>";
 

@@ -19,8 +19,9 @@
   $Nquestion = $linha->cont;
   
   $cont = 0;
-  $nome_aluno = [];
-  $resultado_metrica = [];
+ $aluno = array(array());
+
+ // $resultado_metrica = [];
 
   // Calcula a metrica de confusao para cada aluno, e passa o resultado para um vetor;\\
   while ($linha = mysql_fetch_object($ss_turma)){
@@ -123,17 +124,37 @@
     }else
         $entropia = -($np1*$logp1) - ($np2*$logp2);
 
-    $nome_aluno[$cont] = $nome;
+    $aluno[$cont][0] = $nome;
     $des = abs(number_format($entropia, 4, '.', ','));
-    $resultado_metrica[$cont] = $des;
+    $aluno[$cont][1] = $des;
     $cont++;
-    echo $nome." teve Entropia = ".$entropia."<br>";    
+    
+   // echo $nome." teve Entropia = ".$entropia."<br>";    
     //echo "Resultado: ".abs(number_format($entropia, 4, '.', ','));// resultado do calculo da metrica
   }
 
-  print_r($nome_aluno);
-  print_r($resultado_metrica);
-  echo "<br><br>";
+  //Ordenação dos resultados método bubble sort
+  for($i = 0; $i < count($aluno); $i++)
+  {
+     for($j = 0; $j < count($aluno) - 1; $j++)
+     {
+       if($aluno[$j][1] < $aluno[$j + 1][1])
+       {
+         $aux = $aluno[$j][0];
+         $aux1 = $aluno[$j][1];
+
+         $aluno[$j][0] = $aluno[$j + 1][0];
+         $aluno[$j][1] = $aluno[$j + 1][1];         
+
+         $aluno[$j + 1][0] = $aux;
+         $aluno[$j + 1][1] = $aux1;
+       }
+     }
+  }
+
+//  print_r($nome_aluno);
+ // print_r($resultado_metrica);
+ // echo "<br><br>";
 
   //GERA GRAFICO COM OS RESULTADOS DA TURMA\\
   $html = "<html>
@@ -145,13 +166,14 @@
             function drawChart() {";
   $html = $html." 
                   var dataCategoria = google.visualization.arrayToDataTable([
-                  ['Nome', 'Indice de confusao'],";
-                  for($i = 0; $i < count($nome_aluno);$i++){
-                     $html.="['".$nome_aluno[$i]."',".$resultado_metrica[$i]."],";
+                  ['Nome', 'Índice de desordem'],";
+                  for($i = 0; $i < count($aluno);$i++){
+                     $html.="['".$aluno[$i][0]."',".$aluno[$i][1]."],";
                   }
   $html.=" ]);              
                   var optionsCategoria = {
-                    title: 'Nivel de Confusao por Aluno'
+                    title: 'Nivel de Desordem por Aluno'
+                  
                   };
 
                   var chartCategoria = new google.visualization.BarChart(document.getElementById('Nome'));
