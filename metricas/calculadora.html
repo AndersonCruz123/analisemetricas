@@ -1,0 +1,61 @@
+<html>
+	<meta charset = "UTF-8"/>
+	<body>		
+		<table border="2">
+		Calculadora:
+		<form name="myForm">
+			<tr><td>
+				<input name="Valor1" type="text" value ="">
+			</td></tr>
+			
+			<tr><td>
+				<input name="Valor2" type="text"  value="">
+			</td></tr>
+			
+			<tr><td align=center>
+				<input name="calculate" type="button" value="+" 
+							onclick="somar(document.myForm)">
+				<input name="calculate2" type="button" value="-" 
+							onclick="sub(document.myForm)">
+				<input name="calculate3" type="button" value="X" 
+							onclick="mult(document.myForm)">
+				<input name="calculate4" type="button" value="%" 
+							onclick="div(document.myForm)">
+			</td></tr>
+
+			<tr><td>
+				<input name="result" type="text"  value="">
+			</td></tr>
+		</form>
+		</table>
+
+		<script type="text/javascript">
+			function somar(form){
+				var valor1 = parseInt(form.Valor1.value);
+				var valor2 = parseInt(form.Valor2.value);
+				var resultado = valor1 + valor2;
+					form.result.value = resultado;
+			}
+			function sub(form){
+				var valor1 = parseInt(form.Valor1.value);
+				var valor2 = parseInt(form.Valor2.value);
+				var resultado = valor1 - valor2;
+					form.result.value = resultado;
+			}
+			function mult(form){
+				var valor1 = parseInt(form.Valor1.value);
+				var valor2 = parseInt(form.Valor2.value);
+				var resultado = valor1 * valor2;
+					form.result.value = resultado;
+			}
+			function div(form){
+				var valor1 = parseInt(form.Valor1.value);
+				var valor2 = parseInt(form.Valor2.value);
+				var resultado = valor1 / valor2;
+					form.result.value = resultado;
+			}
+		</script>
+
+
+	</body>
+</html>

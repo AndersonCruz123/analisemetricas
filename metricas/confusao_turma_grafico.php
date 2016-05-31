@@ -1,8 +1,5 @@
 <meta charset = "UTF-8"/>
 <?php
-  
-  include 'consultas.php';
-  
 
   $conexao = @mysql_connect('localhost', 'root', '');
 

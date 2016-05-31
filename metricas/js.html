@@ -1,0 +1,32 @@
+<html>
+	<meta charset = "UTF-8"/>
+	<body>
+		<p>
+		<form name="theForm" action="/cgi-bin/formPost.pl" method="post"
+			onsubmit="return checkForm(theForm.first, theForm.last)">
+			First Name: <input type="text" name="first"><br>
+			Last Name: <input type="text" name="last"><br>
+		</p>
+		<p>
+			<input type="submit" value="submit">
+			<input type="reset" value="reset">
+		</p>
+		Formulário será submetido apenas se
+		</form>
+		<script type="text/javascript">
+			function checkForm(first, last) {
+				var error = "";
+			if (first.value == "")
+				error += "You must enter a first name";
+			if (last.value == "")
+				error += "\nYou must enter a last name";
+			if (error == "")
+				return confirm("No errors found, ...");
+			else { 
+				alert("The following errors were found\n" + error);
+			return false;
+			}
+		}
+		</script>
+	</body>
+</html>

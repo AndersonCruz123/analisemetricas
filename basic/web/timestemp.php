@@ -1,9 +1,5 @@
 <meta charset = "UTF-8"/>
 <?php
-  
-  include 'consultas.php';
-  
-
   $conexao = @mysql_connect('localhost', 'root', '');
 
   mysql_select_db('francelina-dantas-turma7',$conexao);
@@ -28,8 +24,11 @@
   $aluno = array(array());
   $questionsTurma = array_fill(0, $Nquestion, 0);
   //$resultado_metrica = [];
+  $tempo = [];
 
   // Calcula a metrica de confusao para cada aluno, e passa o resultado para um vetor;\\
+  $temp = 0;
+  $duracao = 0;
   while ($linha = mysql_fetch_object($ss_turma)){
       $id = $linha-> idUsuario;
       $nome = $linha-> nome;
@@ -42,17 +41,30 @@
 
               WHERE SS_USUARIO.idUsuario LIKE '.$id.' and (SS_EVENTO.nome LIKE "assessQuestionSelect" or SS_EVENTO.nome LIKE "assessQuestionAnswer")';
       $resultado = mysql_query($sql) or die ("Erro: " . mysql_error());
-      $parametros =[];
+      $timestamp =[];
+      $parametros = [];
       $i = 0;
       while ($linha = mysql_fetch_object($resultado)){// joga os parametros em um vetor
+          $timestamp[$i] = $linha->timestamp;
           $parametros[$i] = $linha->parametros;
         $i++;
       }
-      
-      //exemplo de parametro tipo:
-      // 1 - {"mQuestionId":180,"mQuestionnaireId":41} escolha de questao
-      // or
-      // 2 - {"mCorrectAnswer":"[373]","mQuestionnaireId":41,"mSelectedAnswer":"[373]","mQuestionId":180} selecao de alternativa de questao
+      if ($i <= 1){
+        echo "Usuario $nome sem timestamp definido!</br>";
+      }else{
+          $duracao = $timestamp[$i - 1] - $timestamp[0];
+          if($duracao > 10000){
+            echo "Usuario $nome trocou de dispositivo, duração alterada para 3000</br>";
+            $duracao = 3000;
+          }
+          echo "Usuario $nome demorou $duracao Segundos </br>";
+      }
+      $tempo[$temp] = $duracao/60;
+      $temp++;
+    //exemplo de parametro tipo:
+    // 1 - {"mQuestionId":180,"mQuestionnaireId":41} escolha de questao
+    // or
+    // 2 - {"mCorrectAnswer":"[373]","mQuestionnaireId":41,"mSelectedAnswer":"[373]","mQuestionId":180} selecao de alternativa de questao
       
       $idQuestoes = [];
       $j = 0;
@@ -157,31 +169,17 @@
             function drawChart() {";
   $html = $html." 
                   var dataConfusaoAluno = google.visualization.arrayToDataTable([
-                  ['Nome', 'Indice de confusão'],";
+                  ['Nome', 'Tempo min'],";
                   for($i = 0; $i < count($aluno);$i++){
-                     $html.="['".$aluno[$i][0]."',".$aluno[$i][1]."],";
+                     $html.="['".$aluno[$i][0]."',".$tempo[$i]."],";
                   }
   $html.=" ]);              
                   var optionsAluno = {
-                    title: 'Nível de Confusão por Aluno'                 
+                    title: 'Tempo que o aluno levou para responder o quiz'                 
                   };
 
                   var chartConfusaoAluno = new google.visualization.BarChart(document.getElementById('confusaoAluno'));
                   chartConfusaoAluno.draw(dataConfusaoAluno, optionsAluno);
-
-
-                  var dataQuestaoTurma = google.visualization.arrayToDataTable([
-                  ['Questão', 'Quantidade'],";
-                  for($i = 0; $i < count($questionsTurma);$i++){
-                     $html.="['".$i."',".$questionsTurma[$i]."],";
-                  }
-  $html.=" ]);              
-                  var optionsQuestaoTurma = {
-                    title: 'Quantidade de questão respondida pelos alunos'
-                  };
-
-                  var chartQuestaoTurma = new google.visualization.BarChart(document.getElementById('QuestaoTurma'));
-                  chartQuestaoTurma.draw(dataQuestaoTurma, optionsQuestaoTurma);
 
               }
           </script>
