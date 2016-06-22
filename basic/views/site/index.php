@@ -1,13 +1,13 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'My Yii Application';
+$this->title = 'Signal Metrics';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1></h1>
+        <h1> Sistema de Análises </h1>
 
-        <p class="lead">Sistema de Análises Grafíca de Métricas .</p>
+        <p class="lead">Sistema de Análises Grafíca .</p>
     </div>
 
     <div class="body-content">
@@ -16,23 +16,23 @@ $this->title = 'My Yii Application';
             <div class="col-lg-4">
                 <h2>Descrição</h2>
 
-                <p>Breve descrição do sistema.</p>
+                <p align=”Justify”>Este sistema tem como objetivo demonstrar de forma grafica, informações referentes as turmas participantes do esperimento de monitoramento de sinais realizado em uma sala de aula pela equipe do projeto SIGNAL.</p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">link da Documentaçãio do Yii &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Outras Informações</h2>
+                <h2>O que sera feito?</h2>
 
-                <p>Descrição de outras informações.</p>
+                <p align=”Justify”> Durante a aplicação do experimento, serão coletados diversos dados como, um deles são as informações referentes a resolução de dos questionarios, desses questionarios serão estraidos tempo de resposta, quantidade de acertos entre outros dados dos quais serão aplicados algumas metricas de analise..</p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Forum do Yii &raquo;</a></p>
+                </p>
             </div>
             <div class="col-lg-4">
-                <h2>Informações complementares</h2>
+                <h2>Metricas</h2>
 
-                <p>Descrição das informações complementares</p>
+                <p align=”Justify” > Metricas como, Desordem, Nivel de Confusão, Score, Desviação entre outras.</p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Extensões do Yii &raquo;</a></p>
+                <p> <div id="logo"><?php //echo CHtml::image(Yii::app()->request->baseUrl."/images/logo.gif","ballpop"); ?></div> </p>
+
             </div>
         </div>
 

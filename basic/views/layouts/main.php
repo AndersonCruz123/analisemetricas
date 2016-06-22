@@ -35,8 +35,9 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Usuarios', 'url' => ['/ssusuario/index']],
-                    Yii::$app->user->isGuest ?
+                    ['label' => 'Turma', 'url' => ['/ssusuario/index']],
+                    ['label' => 'Sobre' , 'url' =>['/site/about']],
+                    Yii::$app->user->isGuest?
                         ['label' => 'Login', 'url' => ['/site/login']] :
                         ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                             'url' => ['/site/logout'],

@@ -1,7 +1,5 @@
 <meta charset = "UTF-8"/>
 <?php
-
-
   $conexao = @mysql_connect('localhost', 'root', '');
   mysql_select_db('francelina-dantas-turma7',$conexao);
 

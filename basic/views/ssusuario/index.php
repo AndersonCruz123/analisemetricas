@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?//Html::a('Create Ssusuario', ['create'], ['class' => 'btn btn-success'])?>
         <table border="2">
             <tr><td>
                 <form name="input" action="confusao_turma_grafico.php" target="_blank">
