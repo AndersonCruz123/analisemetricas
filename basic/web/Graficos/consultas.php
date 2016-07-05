@@ -165,5 +165,4 @@
     $minutos = $diferenca;// / 60;
     return $minutos;
   }
-print_r(timestamp_question(23));
 ?>

@@ -47,7 +47,7 @@
       }
       $scoreAlunos[$x][0] = $nome;
       $scoreAlunos[$x][1] = $score;
-      echo "o aluno $nome acertou $score questoes!<br>";
+      //echo "o aluno $nome acertou $score questoes!<br>";
       $x++;
   }
      

@@ -194,6 +194,3 @@
 
   echo $html;
 ?>
-
-Wed, 04 Nov 2015 18:05:44 GMT
-Wed, 04 Nov 2015 18:36:59 GMT

@@ -14,36 +14,35 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <p>
         <table border="2">
             <tr><td>
-                <form name="input" action="confusao_turma_grafico.php" target="_blank">
-                <input type="submit" value="Grafico De Confusão" >
+                <form name="input" action="Graficos/Grafico_confusao.php" target="_blank">
+                <input type="submit" value="Gráfico De Confusão" >
                 </form>
             </td>
             
             <td>
-                <form name="input2" action="desordem_turma_grafico.php" target="_blank">
-                <input type="submit" value="Grafico De Desordem">
+                <form name="input2" action="Graficos/Grafico_desordem.php" target="_blank">
+                <input type="submit" value="Gráfico De Desordem">
                 </form>
             </td>
             
             <td>    
-                <form name="input3" action="timestemp.php" target="_blank">
-                <input type="submit" value="Grafico Duração">
+                <form name="input3" action="Graficos/Grafico_timestemp.php" target="_blank">
+                <input type="submit" value="Gráfico Duração">
                 </form>
             </td>
             
             <td>
-                <form name="input4" action="score.php" target="_blank">
-                <input type="submit" value="Pontuação">
+                <form name="input4" action="Graficos/Grafico_score.php" target="_blank">
+                <input type="submit" value="Gráfico Pontuação">
                 </form>
             </td></tr>
         </table>        
     </p>
     <p>
-        Os dados apresnetados nos gráficos são referentes aos exercicios de primeira ordem, aplicados á turma.
+        Os dados apresentados nos gráficos são referentes a dados de exercicios aplicados á turma.
     </p>
      
     <?= GridView::widget([
@@ -57,8 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             //'senha',
             'professor',
-            'idSala',
-            'idPerfil',
+            //'idSala',
+            //'idPerfil',
             // 'urlFotoPerfil:url',
             // 'urlScreenshot:url',
             // 'paginaAtual',
@@ -69,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'genero',
             // 'idUsuarioTipo',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

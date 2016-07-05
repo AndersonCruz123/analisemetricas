@@ -26,17 +26,17 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'Inicio',
+                'brandLabel' => Html::img('Imagens/MarcaHorizontal_Branco2.png'),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'my-navbar navbar-fixed-top',
                 ],
             ]);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Turma', 'url' => ['/ssusuario/index']],
-                    ['label' => 'Sobre' , 'url' =>['/site/about']],
+                    ['label' => '' ],
                     Yii::$app->user->isGuest?
                         ['label' => 'Login', 'url' => ['/site/login']] :
                         ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -56,9 +56,8 @@ AppAsset::register($this);
     </div>
 
     <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
+        <div class="container" align="center">
+            <p class="pull-left"> <font size="2"> Sistema de Análises | Versão 1.0 | Todos os direitos reservados | <?= date('Y') ?> </font> </p>
         </div>
     </footer>
 
