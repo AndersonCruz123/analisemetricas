@@ -35,7 +35,7 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Turma', 'url' => ['/ssusuario/index']],
+                    ['label' => 'Class', 'url' => ['/ssusuario/index']],
                     ['label' => '' ],
                     Yii::$app->user->isGuest?
                         ['label' => 'Login', 'url' => ['/site/login']] :
@@ -57,7 +57,7 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container" align="center">
-            <p class="pull-left"> <font size="2"> Sistema de Análises | Versão 1.0 | Todos os direitos reservados | <?= date('Y') ?> </font> </p>
+            <p class="pull-left"> <font size="2"> Analysis Systems |  Version 1.0 | All rights reserved | <?= date('Y') ?> </font> </p>
         </div>
     </footer>
 

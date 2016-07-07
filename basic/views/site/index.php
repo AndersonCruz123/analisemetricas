@@ -5,36 +5,35 @@ $this->title = 'Signal Metrics';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Sistema de Análises</h1>
-
-        <p class="lead">Gerenciamento e análise de gráficos de desempenho dos usuarios na sala de aula</p>
+        <!--<h1>Sistema de Análises</h1> -->
+        <h1>Analysis Systems<h1>
+        <p class="lead">Management and performance graphs analysis of the users in the classroom</p>
     </div>
 
     <div class="body-content">
 
         <div class="row">
             <div class="col-lg-4" align="Justify">
-                <h2>Sobre</h2>
-                <b>O Sistema</b>
+                <h2>About</h2>
+                <b>The System</b>
 
-                <p> Este sistema foi desenvolvido para servir de suporte ao professor que utiliza o
-                        composer durante a realização do experimento na sala de aula. O experimento faz parte de uma etapa do projeto de pesquisa SIGNAL, que vem sendo desenvolvido com apoio da Samsung e do Instituto de Computação da Universidade Federal do Amazonas.
+                <p> This system was developed to provide support for the teacher who uses the composer during the experiment in the classroom. The experiment is part of a stage of SIGNAL research project, which is being developed with support from Samsung and Computing Institute of the Federal University of Amazonas.
                 </p>
 
             </div>
             <div class="col-lg-4" align="Justify">
-                <h2>Como?</h2>
-                <b> Coleta de Dados </b>
+                <h2>How?</h2>
+                <b> Data collect </b>
 
-                <p> A coleta de dados, para que a análise possa ser feita, acontecerá durante a realização do experimento com a utilização do tablet na sala de aula..</p>
+                <p> The data collection, so that the analysis can be done, happen during the experiment using the tablet in the classroom.</p>
 
                 </p>
             </div>
             <div class="col-lg-4" align="Justify">
-                <h2>Resultado</h2>
-                <b> Aplicação de Métriticas </b>
+                <h2>Result</h2>
+                <b> Application Metricss </b>
 
-                <p > Através dos dados gerados durante os testes, o sistema de análise irá fornecer métricas de avaliação. Como por exemplo, o tempo de resposta de cada questão em um questionário, a ordem em que foi respondida, o nível de dúvida e entre outros.
+                <p > Through the data generated during testing, the analysis system will supply evaluation metrics. As for example, the response time of each question on a questionnaire, the order in which it was answered, and the level of doubt among others.
                 </p>
 
             </div>

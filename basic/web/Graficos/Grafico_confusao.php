@@ -160,13 +160,13 @@
             function drawChart() {";
   $html = $html." 
                   var dataConfusaoAluno = google.visualization.arrayToDataTable([
-                  ['Nome', 'Indice de confusão'],";
+                  ['Name', 'Confusion index'],";
                   for($i = 0; $i < count($aluno);$i++){
                      $html.="['".$aluno[$i][0]."',".$aluno[$i][1]."],";
                   }
   $html.=" ]);              
                   var optionsAluno = {
-                    title: 'Nível de Confusão por Aluno'                 
+                    title: 'Level of Confusion by Student'                 
                   };
 
                   var chartConfusaoAluno = new google.visualization.BarChart(document.getElementById('confusaoAluno'));
@@ -174,13 +174,13 @@
 
 
                   var dataQuestaoTurma = google.visualization.arrayToDataTable([
-                  ['Questão', 'Quantidade'],";
+                  ['Question', 'Quantity'],";
                   for($i = 0; $i < count($questionsTurma);$i++){
                      $html.="['".$i."',".$questionsTurma[$i]."],";
                   }
   $html.=" ]);              
                   var optionsQuestaoTurma = {
-                    title: 'Quantidade de questão respondida pelos alunos'
+                    title: 'Question of quantity answered by the students'
                   };
 
                   var chartQuestaoTurma = new google.visualization.BarChart(document.getElementById('QuestaoTurma'));

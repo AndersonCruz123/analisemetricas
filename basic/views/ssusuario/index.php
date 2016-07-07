@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SsusuarioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Usuarios';
+$this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ssusuario-index">
@@ -18,31 +18,31 @@ $this->params['breadcrumbs'][] = $this->title;
         <table border="2">
             <tr><td>
                 <form name="input" action="Graficos/Grafico_confusao.php" target="_blank">
-                <input type="submit" value="Gráfico De Confusão" >
+                <input type="submit" value="Confusion Graph" >
                 </form>
             </td>
             
             <td>
                 <form name="input2" action="Graficos/Grafico_desordem.php" target="_blank">
-                <input type="submit" value="Gráfico De Desordem">
+                <input type="submit" value="Disorder Graph">
                 </form>
             </td>
             
             <td>    
                 <form name="input3" action="Graficos/Grafico_timestemp.php" target="_blank">
-                <input type="submit" value="Gráfico Duração">
+                <input type="submit" value="Duration Graph">
                 </form>
             </td>
             
             <td>
                 <form name="input4" action="Graficos/Grafico_score.php" target="_blank">
-                <input type="submit" value="Gráfico Pontuação">
+                <input type="submit" value="Score Graph">
                 </form>
             </td></tr>
         </table>        
     </p>
     <p>
-        Os dados apresentados nos gráficos são referentes a dados de exercicios aplicados á turma.
+        The data presented in the graphs are referred to exercises data applied will class..
     </p>
      
     <?= GridView::widget([

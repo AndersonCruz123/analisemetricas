@@ -61,13 +61,13 @@
             function drawChart() {";
   $html = $html." 
                   var dataConfusaoAluno = google.visualization.arrayToDataTable([
-                  ['Nome', 'Score'],";
+                  ['Name', 'Score'],";
                   for($i = 0; $i < count($scoreAlunos);$i++){
                      $html.="['".$scoreAlunos[$i][0]."',".$scoreAlunos[$i][1]."],";
                   }
   $html.=" ]);              
                   var optionsAluno = {
-                    title: 'Pontuação de cada aluno no quiz'                 
+                    title: 'Score of each student in the quiz'                 
                   };
 
                   var chartConfusaoAluno = new google.visualization.BarChart(document.getElementById('confusaoAluno'));

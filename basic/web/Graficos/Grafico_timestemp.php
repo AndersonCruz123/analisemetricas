@@ -38,13 +38,13 @@
             function drawChart() {";
   $html = $html." 
                   var dataConfusaoAluno = google.visualization.arrayToDataTable([
-                  ['Nome', 'Tempo em minutos'],";
+                  ['Name', 'Time in minutes'],";
                   for($i = 0; $i < count($nomes);$i++){
                      $html.="['".$nomes[$i]."',".$tempoAlunos[$i]."],";
                   }
   $html.=" ]);              
                   var optionsAluno = {
-                    title: 'Tempo gasto para responder o quiz'                 
+                    title: 'Time spent to answer the quiz'                 
                   };
 
                   var chartConfusaoAluno = new google.visualization.BarChart(document.getElementById('confusaoAluno'));

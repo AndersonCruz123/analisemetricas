@@ -173,13 +173,13 @@
             function drawChart() {";
   $html = $html." 
                   var dataCategoria = google.visualization.arrayToDataTable([
-                  ['Nome', 'Índice de desordem'],";
+                  ['Name', 'Disorder Index'],";
                   for($i = 0; $i < count($aluno);$i++){
                      $html.="['".$aluno[$i][0]."',".$aluno[$i][1]."],";
                   }
   $html.=" ]);              
                   var optionsCategoria = {
-                    title: 'Nivel de Desordem por Aluno'
+                    title: 'Disorder level by Student'
                   
                   };
 
