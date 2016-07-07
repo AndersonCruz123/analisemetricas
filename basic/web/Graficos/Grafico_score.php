@@ -20,14 +20,14 @@
       $j = 0;
       $contIds = 0;
       foreach ($parametros as $action) {
-        $part1 = split(':', $action);
+        $part1 = explode(':', $action);
         if(count($part1)  == 5){ //Tamanho do tipo 2;
           
-          $id = split('}', $part1[4]);
+          $id = explode('}', $part1[4]);
           $idQuestoes = $id[0];
           if($idQuestoes > 100){//questoes do tipo 41,  primeira etapa.
-            $part2 = split('"', $part1[1]);
-            $part3 = split('"', $part1[3]);
+            $part2 = explode('"', $part1[1]);
+            $part3 = explode('"', $part1[3]);
 
             $respostaCorreta[$j] = $part2[1];
             $respostaSelecionada[$j] = $part3[1];
@@ -39,7 +39,7 @@
       }
       $score = 0;
       $i = 0;
-      while($i < count($respostaSelecionada) and strlen($respostaSelecionada[$i]) < 6){ 
+      while($i < count($respostaSelecionada) and strlen($respostaSelecionada[$i]) < 6){ //Verifica se a resposta certa
         if($respostaSelecionada[$i] == $respostaCorreta[$i] and $score < 5){
           $score++;
         }

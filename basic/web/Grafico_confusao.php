@@ -1,8 +1,9 @@
 <meta charset = "UTF-8"/>
 <?php
-  $conexao = @mysql_connect('localhost', 'root', '');
 
-  mysql_select_db('francelina-dantas-turma7',$conexao);
+  $conexao = @mysqli_connect('localhost', 'smarcos', 'password');
+
+  mysqli_select_db($conexao, 'francelina-dantas-turma7');
 
   //SELECIONA TODOS OS ALUNOS DA TURMA + SEUS RESPECTIVOS ID's \\
   $sql_turma = 'SELECT SS_USUARIO_TURMA_AULA.idTurma, SS_USUARIO.nome, SS_USUARIO.idUsuario  
@@ -10,25 +11,24 @@
                 INNER join `SS_USUARIO_TURMA_AULA` 
                 ON SS_USUARIO.idUsuario LIKE SS_USUARIO_TURMA_AULA.idUsuario 
                   WHERE SS_USUARIO_TURMA_AULA.idTurma = 1 AND SS_USUARIO.IdUsuarioTipo = 3';
-  $ss_turma = mysql_query($sql_turma) or die ("Erro turma: " . mysql_error());
-  
-  //Contando as questoes
+  $ss_turma = mysqli_query($conexao,$sql_turma) or die ("Erro turma: " . mysqli_error());
+
+
+
+//Contando as questoes
   $sql_contQ = 'SELECT count(idRecurso) as cont 
                 FROM SS_QUESTIONARIO_QUESTAO 
                     WHERE idRecurso LIKE "41"';
-  $Nq = mysql_query($sql_contQ) or die ("Erro ".mysql_error());
-  $linha = mysql_fetch_object($Nq);
+  $Nq = mysqli_query($conexao, $sql_contQ) or die ("Erro ".mysqli_error());
+  $linha = mysql_fetch_object($Nq) or die("Aqui".mysqli_error());
   $Nquestion = $linha->cont;
 
   $cont = 0;
   $aluno = array(array());
   $questionsTurma = array_fill(0, $Nquestion, 0);
   //$resultado_metrica = [];
-  $tempo = [];
 
   // Calcula a metrica de confusao para cada aluno, e passa o resultado para um vetor;\\
-  $temp = 0;
-  $duracao = 0;
   while ($linha = mysql_fetch_object($ss_turma)){
       $id = $linha-> idUsuario;
       $nome = $linha-> nome;
@@ -41,36 +41,24 @@
 
               WHERE SS_USUARIO.idUsuario LIKE '.$id.' and (SS_EVENTO.nome LIKE "assessQuestionSelect" or SS_EVENTO.nome LIKE "assessQuestionAnswer")';
       $resultado = mysql_query($sql) or die ("Erro: " . mysql_error());
-      $timestamp =[];
-      $parametros = [];
+      $parametros =[];
       $i = 0;
       while ($linha = mysql_fetch_object($resultado)){// joga os parametros em um vetor
-          $timestamp[$i] = $linha->timestamp;
           $parametros[$i] = $linha->parametros;
         $i++;
       }
-      if ($i <= 1){
-        echo "Usuario $nome sem timestamp definido!</br>";
-      }else{
-          $duracao = $timestamp[$i - 1] - $timestamp[0];
-          if($duracao > 10000){
-            echo "Usuario $nome trocou de dispositivo, duração alterada para 3000</br>";
-            $duracao = 3000;
-          }
-          echo "Usuario $nome demorou $duracao Segundos </br>";
-      }
-      $tempo[$temp] = $duracao/60;
-      $temp++;
-    //exemplo de parametro tipo:
-    // 1 - {"mQuestionId":180,"mQuestionnaireId":41} escolha de questao
-    // or
-    // 2 - {"mCorrectAnswer":"[373]","mQuestionnaireId":41,"mSelectedAnswer":"[373]","mQuestionId":180} selecao de alternativa de questao
+      
+      //exemplo de parametro tipo:
+      // 1 - {"mQuestionId":180,"mQuestionnaireId":41} escolha de questao
+      // or
+      // 2 - {"mCorrectAnswer":"[373]","mQuestionnaireId":41,"mSelectedAnswer":"[373]","mQuestionId":180} selecao de alternativa de questao
       
       $idQuestoes = [];
       $j = 0;
       foreach ($parametros as $action) {
         $part1 = split(':', $action);
-        if(count($part1)  == 5){ //Tamanho do tipo 2;
+	echo "passei aqui"; 
+       if(count($part1)  == 5){ //Tamanho do tipo 2;
           $part2 = split('}', $part1[4]);  //  questão respondida;
           $idQuestoes[$j] = $part2[0]; //passa os os numeros das questões para um vetor;
           $j++;
@@ -169,17 +157,31 @@
             function drawChart() {";
   $html = $html." 
                   var dataConfusaoAluno = google.visualization.arrayToDataTable([
-                  ['Nome', 'Tempo min'],";
+                  ['Nome', 'Indice de confusão'],";
                   for($i = 0; $i < count($aluno);$i++){
-                     $html.="['".$aluno[$i][0]."',".$tempo[$i]."],";
+                     $html.="['".$aluno[$i][0]."',".$aluno[$i][1]."],";
                   }
   $html.=" ]);              
                   var optionsAluno = {
-                    title: 'Tempo que o aluno levou para responder o quiz'                 
+                    title: 'Nível de Confusão por Aluno'                 
                   };
 
                   var chartConfusaoAluno = new google.visualization.BarChart(document.getElementById('confusaoAluno'));
                   chartConfusaoAluno.draw(dataConfusaoAluno, optionsAluno);
+
+
+                  var dataQuestaoTurma = google.visualization.arrayToDataTable([
+                  ['Questão', 'Quantidade'],";
+                  for($i = 0; $i < count($questionsTurma);$i++){
+                     $html.="['".$i."',".$questionsTurma[$i]."],";
+                  }
+  $html.=" ]);              
+                  var optionsQuestaoTurma = {
+                    title: 'Quantidade de questão respondida pelos alunos'
+                  };
+
+                  var chartQuestaoTurma = new google.visualization.BarChart(document.getElementById('QuestaoTurma'));
+                  chartQuestaoTurma.draw(dataQuestaoTurma, optionsQuestaoTurma);
 
               }
           </script>

@@ -46,7 +46,7 @@ class Ssusuario extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'SSUSUARIO';
+        return 'SS_USUARIO';
     }
 
     /**

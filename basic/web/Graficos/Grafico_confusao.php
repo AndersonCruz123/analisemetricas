@@ -1,24 +1,29 @@
 <meta charset = "UTF-8"/>
+<title>Gráfico Confusão Turma</title>
 <?php
+  try{
+      #Conexão com MySQL via PDO_MYSQL
+      $DBH = new PDO("mysql:host=localhost;dbname=francelina-dantas-turma7", "smarcos", "password");
+  }catch (PDOException $e) { 
+      echo $e->getMessage();
+  }
 
-  $conexao = @mysql_connect('localhost', 'root', '');
+  //$conexao = @mysql_connect('localhost', 'root', '');
 
-  mysql_select_db('francelina-dantas-turma7',$conexao);
+  //mysql_select_db('francelina-dantas-turma7',$conexao);
 
   //SELECIONA TODOS OS ALUNOS DA TURMA + SEUS RESPECTIVOS ID's \\
-  $sql_turma = 'SELECT SS_USUARIO_TURMA_AULA.idTurma, SS_USUARIO.nome, SS_USUARIO.idUsuario  
-                FROM `SS_USUARIO` 
-                INNER join `SS_USUARIO_TURMA_AULA` 
-                ON SS_USUARIO.idUsuario LIKE SS_USUARIO_TURMA_AULA.idUsuario 
-                  WHERE SS_USUARIO_TURMA_AULA.idTurma = 1 AND SS_USUARIO.IdUsuarioTipo = 3';
-  $ss_turma = mysql_query($sql_turma) or die ("Erro turma: " . mysql_error());
+  //$sql_turma
+  $ss_turma = $DBH->query("SELECT SS_USUARIO_TURMA_AULA.idTurma, SS_USUARIO.nome, SS_USUARIO.idUsuario FROM `SS_USUARIO` INNER join `SS_USUARIO_TURMA_AULA` ON SS_USUARIO.idUsuario LIKE SS_USUARIO_TURMA_AULA.idUsuario WHERE SS_USUARIO_TURMA_AULA.idTurma = 1 AND SS_USUARIO.IdUsuarioTipo = 3") or die ("Error: ".$ss_turma->errorInfo());
+
+  //$ss_turma = mysql_query($sql_turma) or die ("Erro turma: " . mysql_error());
   
   //Contando as questoes
-  $sql_contQ = 'SELECT count(idRecurso) as cont 
+  $sql_contQ = $DBH->query('SELECT count(idRecurso) as cont 
                 FROM SS_QUESTIONARIO_QUESTAO 
-                    WHERE idRecurso LIKE "41"';
-  $Nq = mysql_query($sql_contQ) or die ("Erro ".mysql_error());
-  $linha = mysql_fetch_object($Nq);
+                    WHERE idRecurso LIKE "41"') or die ("Error: ".$sql_contQ);
+  //$Nq = mysql_query($sql_contQ) or die ("Erro ".mysql_error());
+  $linha = $sql_contQ->fetch(PDO::FETCH_OBJ);//mysql_fetch_object($Nq);
   $Nquestion = $linha->cont;
 
   $cont = 0;
@@ -27,21 +32,21 @@
   //$resultado_metrica = [];
 
   // Calcula a metrica de confusao para cada aluno, e passa o resultado para um vetor;\\
-  while ($linha = mysql_fetch_object($ss_turma)){
+  while ($linha = $ss_turma->fetch(PDO::FETCH_OBJ)){
       $id = $linha-> idUsuario;
       $nome = $linha-> nome;
 
       //Selecionando os logs //43 duvidou 4 vezes, 21 duvidou 0 vezes.
-      $sql = 'SELECT SS_EVENTO.nome,SS_EVENTO.timestamp, SS_EVENTO.parametros
+      $resultado = $DBH->query('SELECT SS_EVENTO.nome,SS_EVENTO.timestamp, SS_EVENTO.parametros
               FROM SS_EVENTO
               INNER join SS_USUARIO 
               ON  SS_USUARIO.idUsuario LIKE SS_EVENTO.idUsuario
 
-              WHERE SS_USUARIO.idUsuario LIKE '.$id.' and (SS_EVENTO.nome LIKE "assessQuestionSelect" or SS_EVENTO.nome LIKE "assessQuestionAnswer")';
-      $resultado = mysql_query($sql) or die ("Erro: " . mysql_error());
+              WHERE SS_USUARIO.idUsuario LIKE '.$id.' and (SS_EVENTO.nome LIKE "assessQuestionSelect" or SS_EVENTO.nome LIKE "assessQuestionAnswer")') or die("Error: ".$resultado);
+      //$resultado = mysql_query($sql) or die ("Erro: " . mysql_error());
       $parametros =[];
       $i = 0;
-      while ($linha = mysql_fetch_object($resultado)){// joga os parametros em um vetor
+      while ($linha = $resultado->fetch(PDO::FETCH_OBJ)){// joga os parametros em um vetor
           $parametros[$i] = $linha->parametros;
         $i++;
       }
@@ -54,9 +59,10 @@
       $idQuestoes = [];
       $j = 0;
       foreach ($parametros as $action) {
-        $part1 = split(':', $action);
+
+       $part1 = explode(':', $action);
         if(count($part1)  == 5){ //Tamanho do tipo 2;
-          $part2 = split('}', $part1[4]);  //  questão respondida;
+          $part2 = explode('}', $part1[4]);  //  questão respondida;
           $idQuestoes[$j] = $part2[0]; //passa os os numeros das questões para um vetor;
           $j++;
         }

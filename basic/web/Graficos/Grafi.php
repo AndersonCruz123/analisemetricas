@@ -3,56 +3,56 @@
   try{
       #Conexão com MySQL via PDO_MYSQL
       $DBH = new PDO("mysql:host=localhost;dbname=francelina-dantas-turma7", "smarcos", "password");
-  }catch (PDOException $e) { 
+  }catch (PDOException $e) {
       echo $e->getMessage();
   }
+
   //$conexao = @mysql_connect('localhost', 'root', '');
+
   //mysql_select_db('francelina-dantas-turma7',$conexao);
 
   //SELECIONA TODOS OS ALUNOS DA TURMA + SEUS RESPECTIVOS ID's \\
+  //$sql_turma
   $ss_turma = $DBH->query("SELECT SS_USUARIO_TURMA_AULA.idTurma, SS_USUARIO.nome, SS_USUARIO.idUsuario FROM `SS_USUARIO` INNER join `SS_USUARIO_TURMA_AULA` ON SS_USUARIO.idUsuario LIKE SS_USUARIO_TURMA_AULA.idUsuario WHERE SS_USUARIO_TURMA_AULA.idTurma = 1 AND SS_USUARIO.IdUsuarioTipo = 3") or die ("Error: ".$ss_turma->errorInfo());
+
   //$ss_turma = mysql_query($sql_turma) or die ("Erro turma: " . mysql_error());
 
-  //CONTA AS QUESTOES\\
-   $sql_contQ = $DBH->query('SELECT count(idRecurso) as cont 
+  //Contando as questoes
+  $sql_contQ = $DBH->query('SELECT count(idRecurso) as cont 
                 FROM SS_QUESTIONARIO_QUESTAO 
                     WHERE idRecurso LIKE "41"') or die ("Error: ".$sql_contQ);
   //$Nq = mysql_query($sql_contQ) or die ("Erro ".mysql_error());
   $linha = $sql_contQ->fetch(PDO::FETCH_OBJ);//mysql_fetch_object($Nq);
   $Nquestion = $linha->cont;
-  
+
   $cont = 0;
   $aluno = array(array());
-
-  // $resultado_metrica = [];
+  $questionsTurma = array_fill(0, $Nquestion, 0);
+  //$resultado_metrica = [];
 
   // Calcula a metrica de confusao para cada aluno, e passa o resultado para um vetor;\\
   while ($linha = $ss_turma->fetch(PDO::FETCH_OBJ)){
-    $id = $linha-> idUsuario;
-    $nome = $linha-> nome;
-    //SELECIONA OS PARAMETROS NECESSARIOS PARA O CALCULO DA METRICA\\
-    $resultado = $DBH->query('SELECT SS_EVENTO.nome,SS_EVENTO.timestamp, SS_EVENTO.parametros
+      $id = $linha-> idUsuario;
+      $nome = $linha-> nome;
+
+
+    
+    $idQuestoes = []; //
+$resultado = $DBH->query('SELECT SS_EVENTO.nome,SS_EVENTO.timestamp, SS_EVENTO.parametros
               FROM SS_EVENTO
               INNER join SS_USUARIO 
               ON  SS_USUARIO.idUsuario LIKE SS_EVENTO.idUsuario
 
               WHERE SS_USUARIO.idUsuario LIKE '.$id.' and (SS_EVENTO.nome LIKE "assessQuestionSelect" or SS_EVENTO.nome LIKE "assessQuestionAnswer")') or die("Error: ".$resultado);
+      //$resultado = mysql_query($sql) or die ("Erro: " . mysql_error());
+      $parametros =[];
+      $i = 0;
+      while ($linha = $resultado->fetch(PDO::FETCH_OBJ)){// joga os parametros em um vetor
+          $parametros[$i] = $linha->parametros;
+        $i++;
+      }
 
-    //$resultado = mysql_query($sql) or die ("Erro: " . mysql_error());
 
-    $parametros =[];
-    $i = 0;
-    while ($linha = $resultado->fetch(PDO::FETCH_OBJ)){// joga os parametros em um vetor
-        $parametros[$i] = $linha->parametros;
-      $i++;
-    }
-    
-    // Exemplo de parametros:
-    // 1 - {"mQuestionId":180,"mQuestionnaireId":41} escolha de questao
-    // or
-    // 2 - {"mCorrectAnswer":"[373]","mQuestionnaireId":41,"mSelectedAnswer":"[373]","mQuestionId":180} selecao de alternativa de questao
-    
-    $idQuestoes = []; //questionsNumber;
     $j = 0;
     //41 - Exercícios Primeira Etapa 22 teste de egajamento
     foreach ($parametros as $action) {
@@ -78,7 +78,7 @@
         }else{ //se repetiu
           for ($j=0; $j < count($q); $j++) { 
             if($q[$j] == $questoes)
-              //HISTOGRAM\\
+ a             //HISTOGRAM\\
               $questions[$j]++; //conta quantas vezes o aluno repetiu a questao atual
           }                  
         }
