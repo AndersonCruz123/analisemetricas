@@ -99,6 +99,11 @@ class SiteController extends Controller
         return $this->render('metrics');
     }
 
+    public function actionSignal()
+    {
+        return $this->render('signal');
+    }
+
     public function actionAnalysis()
     {
         return Yii::$app->runAction('ssusuario/index/');

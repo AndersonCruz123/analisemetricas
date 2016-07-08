@@ -20,22 +20,60 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+<style>
+    .navbar-brand > img{
+        width:97px; 
+        height:30px;
+    }
+.navbar .nav > li > a {
+    
+    color: #2479a9;
+}
+
+.nav > li > a:hover{
+    background-color:#2479a9;
+}
+.navbar .brand, .navbar .nav > li > a:hover {
+    color: #1048ae;
+}
+
+.nav .open > a
+{
+    background:green;
+    
+}
+
+.navbar-inverse .navbar-nav>.active>a:hover {
+  color: white;
+  background-color: #2479a9;
+
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus{
+  color: #fff;
+  background-color: #1048ae;
+}
+.navbar-inverse {
+  background-color: white;
+  border-color: #080808;
+}
+
+</style>
 <body>
 
 <?php $this->beginBody() ?>
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => Html::img('Imagens/MarcaHorizontal_Branco2.png'),
+                'brandLabel' => Html::img('/analisemetricas/basic/web/site/sitecomposer-16.png'),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'my-navbar navbar-fixed-top',
+                    'class' => 'navbar navbar-inverse navbar-fixed-top',
                 ],
             ]);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Dataset', 'url' => ['/site/dataset']],
                     ['label' => 'Metrics', 'url' => ['/site/metrics']],
                     ['label' => '' ],
                     /*Yii::$app->user->isGuest?

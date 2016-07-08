@@ -103,7 +103,7 @@ $this->title = 'Project Signal';
 <div id="section1" class="container-fluid" id="container-fluid">
 <div class="marginButtomSection1">
 <?php
-echo Html::a('<strong>See More</strong>', ['analysis'], ['class' => 'btn btn-info btn-lg'])
+echo Html::a('<strong>See More</strong>', ['signal'], ['class' => 'btn btn-info btn-lg'])
 ?>
 </div>
 
@@ -133,7 +133,7 @@ echo Html::a('<strong>See More</strong>', ['analysis'], ['class' => 'btn btn-inf
    </ul>
 <div class="marginButtomSection2">
 <?php
-echo Html::a('<strong>Acess system</strong>', ['analysis'], ['class' => 'btn btn-info btn-lg'])
+echo Html::a('<strong>Acess system</strong>', ['metrics'], ['class' => 'btn btn-info btn-lg'])
 ?>
 </div>
 </div>
