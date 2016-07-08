@@ -148,7 +148,7 @@ echo Html::a('<strong>Acess system</strong>', ['analysis'], ['class' => 'btn btn
    </ul>
 <div class="marginButtomSection2">
 <?php
-echo Html::a('<strong>Acess Papers</strong>', ['analysis'], ['class' => 'btn btn-info btn-lg'])
+echo Html::a('<strong>Acess Papers</strong>', ['analysis'], ['class' => 'btn btn-success btn-lg'])
 ?>
 </div>
 </div>
