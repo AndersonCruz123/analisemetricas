@@ -35,13 +35,14 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Class', 'url' => ['/ssusuario/index']],
+                    ['label' => 'Dataset', 'url' => ['/site/dataset']],
+                    ['label' => 'Metrics', 'url' => ['/site/metrics']],
                     ['label' => '' ],
-                    Yii::$app->user->isGuest?
+                    /*Yii::$app->user->isGuest?
                         ['label' => 'Login', 'url' => ['/site/login']] :
                         ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                             'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
+                            'linkOptions' => ['data-method' => 'post']],*/
                 ],
             ]);
             NavBar::end();
@@ -57,7 +58,7 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container" align="center">
-            <p class="pull-left"> <font size="2"> Analysis Systems |  Version 1.0 | All rights reserved | <?= date('Y') ?> </font> </p>
+            <p class="pull-left"> <font size="2"> SIGNAL |  Version 1.0 | All rights reserved | <?= date('Y') ?> </font> </p>
         </div>
     </footer>
 
