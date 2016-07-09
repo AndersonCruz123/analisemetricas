@@ -102,7 +102,7 @@ border-color: #2479a9;
 }
 #h1Education{
      color: white;
-     margin-top: 60px; 
+     margin-top: 35px; 
 }#gridBtn1{
      margin-top: 60px;
      margin-left: 240px; 
@@ -138,9 +138,16 @@ border-color: #2479a9;
   font-weight: bold;
 }#imgDivProject{
     margin-top: 30px;
-}.hrBorder{
+}#imgDivProjectFapeam{
+    margin-left: 50px;
+    margin-top: 30px;
+}
+.hrBorder{
   border-style: dashed;
   margin-bottom: 60px;  
+}#txtDivProject{
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 
@@ -192,7 +199,7 @@ border-color: #2479a9;
         <!--<h1>Sistema de Análises</h1> -->
         <h1 align="center">The project</h1>
         <p class="lead" align="center">The main aim of the SIGNAL (System for Intelligent enGagement aNALysis
-in digital education context) project is to collect and analyse
+in digital education context) project is to collect and analyze
 multidimensional data from sensors and honest signals to infer the
 correlation between infrastructure, educational software, learning
 objects and students activity/behavior, in order to recognize,
@@ -200,7 +207,8 @@ classify and recommend learning parameters to be applied in the
 context of digital education in a classroom of the future.</p>
 
      <img id="imgDivProject" src="site/sitecomposer-18.png" width="15%" height="15%">
-     <p id="txtDivProject">The Support</p>
+     <img id="imgDivProjectFapeam" src="site/fapeamlogo.png" width="15%" height="15%">
+     <p id="txtDivProject"><strong>The Support</strong></p>
 
      <img id="imgDivProject" src="site/sitecomposer-17.png" width="15%" height="15%">
      <p id="txtDivProject">Realization</p>
@@ -251,7 +259,6 @@ echo Html::a('Acess system', ['metrics'], ['class' => 'btn btn-secondary','id'=>
 <div id="section4" class="container-fluid">
   <h1 align="center">Papers</h1>
  <hr class="hrBorder" width=50%  align=center>  
-  <p id="p">Papers plublished:</p>
   <ul id="listLinks">
     <a href="papers/CCIS.pdf"><li>Experimental Evaluation on Machine Learning Techniques for Human
 Activities Recognition in Digital Education Context.  Springer
@@ -261,8 +268,8 @@ Communications in Computer and Information Science (CCIS’2016)</li></a>
 Activities Recognition in Digital Education Context. 1st International
 Workshop on Social Computing in Digital Education (DigEdu’2015)</li></a>
     
-    <li>The Role of Agent-based Simulation in Education. 2nd International
-Workshop on Social Computing in Digital Education (DigEdu’2016)</li>
+    <a href="papers/DigEdu2016.pdf"><li>The Role of Agent-based Simulation in Education. 2nd International
+Workshop on Social Computing in Digital Education (DigEdu’2016)</li></a>
    
       <a href="papers/ENCOSIS.pdf"> <li>Avaliação Experimental de Técnicas de Aprendizagem de Máquina para o
 Reconhecimento de Atividades Humanas no Contexto da Educação

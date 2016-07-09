@@ -10,8 +10,8 @@ $this->title = 'Signal Metrics';
 
     <div class="jumbotron">
         <!--<h1>Sistema de Análises</h1> -->
-        <h1>Analysis Systems<h1>
-        <p class="lead">Management and performance graphs analysis of the users in the classroom</p>
+        <h1>Learning Metrics Analysis<h1>
+        <p class="lead">Management and performance charts of students in the classroom of the future</p>
     </div>
 
     <div class="body-content">
@@ -27,23 +27,30 @@ echo Html::a('<strong>Try it!</strong>', ['analysis'], ['class' => 'btn btn-info
                 <h2>About</h2>
                 <b>The System</b>
 
-                <p> This system was developed to provide support for the teacher who uses the composer during the experiment in the classroom. The experiment is part of a stage of SIGNAL research project, which is being developed with support from Samsung and Computing Institute of the Federal University of Amazonas.
+                <p> This system was developed to provide support for the teacher who uses
+the composer/player/service during a lecture in the classroom of the
+future. The learning metrics analysis is part of the SIGNAL research
+project, which is being developed from Institute of Computing at
+Federal University of Amazonas with support from Samsung Eletrônica da
+Amazônia.
                 </p>
 
             </div>
             <div class="col-lg-4" align="Justify">
                 <h2>How?</h2>
-                <b> Data collect </b>
+                <b> Data collection</b>
 
-                <p> The data collection, so that the analysis can be done, happen during the experiment using the tablet in the classroom.</p>
+                <p>The data collection is made up using a tablet with learning objects
+                    instrumented.</p>
 
                 </p>
             </div>
             <div class="col-lg-4" align="Justify">
                 <h2>Result</h2>
-                <b> Application Metricss </b>
+                <b>Learning Metrics</b>
 
-                <p > Through the data generated during testing, the analysis system will supply evaluation metrics. As for example, the response time of each question on a questionnaire, the order in which it was answered, and the level of doubt among others.
+                <p > Through the data generated during classes, the learning metrics
+analysis system will supply several evaluation metrics.
                 </p>
 
             </div>
