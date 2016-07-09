@@ -65,7 +65,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => Html::img('/analisemetricas/basic/web/site/sitecomposer-16.png'),
+                'brandLabel' => Html::img('site/sitecomposer-16.png'),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar navbar-inverse navbar-fixed-top',

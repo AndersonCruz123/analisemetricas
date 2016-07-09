@@ -12,21 +12,21 @@ $this->title = 'Signal Metrics';
     color: white;
 }    
 #projectOverView{
-    background-image: url("/analisemetricas/basic/web/site/celular.jpg");
+    background-image: url("site/celular.jpg");
     background-size: 100% 100%; background-repeat: no-repeat;
     color: #2479a9;
     height: 400px;
 }
 
 #projectTecnologies{
-    background-image: url("/analisemetricas/basic/web/site/sitecomposer-19.png");
+    background-image: url("site/sitecomposer-19.png");
     background-size: 100% 100%; background-repeat: no-repeat;
     color: white;
     width: 100%;
     height: 100%
 }
 #projectResult{
-    background-image: url("/analisemetricas/basic/web/site/sitecomposer-21.png");
+    background-image: url("site/sitecomposer-21.png");
     background-size: 100% 100%; background-repeat: no-repeat;
     color: white;
     width: 100%;
@@ -35,7 +35,7 @@ $this->title = 'Signal Metrics';
 
 
 #projectTeam{
-    background-image: url("/analisemetricas/basic/web/site/sitecomposer-20.png");
+    background-image: url("site/sitecomposer-20.png");
     background-size: 100% 100%; background-repeat: no-repeat;
     color: white;
     height: 500px;
@@ -76,10 +76,10 @@ $this->title = 'Signal Metrics';
         <h1 align="right">The project</h1>
         <p class="lead" align="right">The SIGNAL project is coordinated by Professor Dr. Raimundo Barreto together with Samsung Electronics Amazon belongs to Federal University of Amazonas. Topics of interest digital education, intelligent systems, recognition of activity and behavior, use of sensors and others.</p>
 
-     <img id="imgDivProject" src="/analisemetricas/basic/web/site/sitecomposer-18.png" width="15%" height="15%">
+     <img id="imgDivProject" src="site/sitecomposer-18.png" width="15%" height="15%">
      <p id="txtDivProject">Support</p>
 
-     <img id="imgDivProject" src="/analisemetricas/basic/web/site/sitecomposer-17.png" width="15%" height="15%">
+     <img id="imgDivProject" src="site/sitecomposer-17.png" width="15%" height="15%">
      <p id="txtDivProject">Realization</p>
     </div>
 

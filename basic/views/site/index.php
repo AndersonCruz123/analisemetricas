@@ -15,7 +15,7 @@ $this->title = 'Project Signal';
       position: relative;
   }
   #section1 {padding-top:50px;height:800px; 
-    background-image: url('/analisemetricas/basic/web/site/sitecomposer-22.png');   
+    background-image: url('site/sitecomposer-22.png');   
    background-size: 100% 100%; background-repeat: no-repeat;}
   #section2 {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;}
   #section3 {padding-top:50px;height:500px;color: #fff; background-color: #009688;}
@@ -72,7 +72,18 @@ $this->title = 'Project Signal';
   color: #fff;
   background-color: #1048ae;
 }
+.container-fluid{
+  padding-right: 0px;
+  padding-left: 0px;
+}
 
+.container-fluid>.navbar-header{
+  background-color: white;
+}
+
+.navbar-inverse .navbar-toggle:hover {
+  background-color: #1048ae;
+}
   </style>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -85,7 +96,7 @@ $this->title = 'Project Signal';
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#" id="logo"><img src="/analisemetricas/basic/web/site/sitecomposer-16.png" width="97px" height="30px"></a>
+      <a class="navbar-brand" href="#" id="logo"><img src="site/sitecomposer-16.png" width="97px" height="30px"></a>
     </div>
     <div>
       <div class="collapse navbar-collapse" id="myNavbar">
@@ -112,13 +123,13 @@ echo Html::a('<strong>See More</strong>', ['signal'], ['class' => 'btn btn-info 
   <h1>Data set</h1>
   <p>We performed several experiments to obtain data that are used in research in progress:</p>
   <p>Sensors used: Accelerometer, Galvanic Skin Response, Heartbeat, Gyroscope and others. Click for download dataset</p>  
-<a href="/analisemetricas/basic/dataset/RecognitionEmotion.zip"><button type="button" class="btn btn-primary">Recogntion Emotions</button></a>
-<a href="/analisemetricas/basic/dataset/RecognitionSitting.zip"><button type="button" class="btn btn-secondary">Recognition Sitting</button></a>
-<a href="/analisemetricas/basic/dataset/RecognitionStanding.zip"><button type="button" class="btn btn-success">Recognition Standing</button></a>
-<a href="/analisemetricas/basic/dataset/RecognitionWalking.zip"><button type="button" class="btn btn-info">Recognition Walking</button></a>
-<a href="/analisemetricas/basic/dataset/RecognitionSeizure.zip"><button type="button" class="btn btn-warning">Recognition Seizure</button></a>
-<a href="/analisemetricas/basic/dataset/RecognitionFaiting.zip"><button type="button" class="btn btn-danger">Recognition Faiting</button></a>
-<a href="/analisemetricas/basic/dataset/ExperimentalWEKASoftware.zip"><button type="button" class="btn btn-primary">WEKA experimental</button></a>
+<a href="dataset/RecognitionEmotion.zip"><button type="button" class="btn btn-primary">Recogntion Emotions</button></a>
+<a href="dataset/RecognitionSitting.zip"><button type="button" class="btn btn-secondary">Recognition Sitting</button></a>
+<a href="dataset/RecognitionStanding.zip"><button type="button" class="btn btn-success">Recognition Standing</button></a>
+<a href="dataset/RecognitionWalking.zip"><button type="button" class="btn btn-info">Recognition Walking</button></a>
+<a href="dataset/RecognitionSeizure.zip"><button type="button" class="btn btn-warning">Recognition Seizure</button></a>
+<a href="dataset/RecognitionFaiting.zip"><button type="button" class="btn btn-danger">Recognition Faiting</button></a>
+<a href="dataset/ExperimentalWEKASoftware.zip"><button type="button" class="btn btn-primary">WEKA experimental</button></a>
 </div>
 
 
