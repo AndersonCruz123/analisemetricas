@@ -34,7 +34,7 @@ AppAsset::register($this);
     background-color:#2479a9;
 }
 .navbar .brand, .navbar .nav > li > a:hover {
-    color: #1048ae;
+    color: #2479a9;
 }
 
 .nav .open > a
@@ -51,7 +51,7 @@ AppAsset::register($this);
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus{
   color: #fff;
-  background-color: #1048ae;
+  background-color: #2479a9;
 }
 .navbar-inverse {
   background-color: white;
