@@ -67,14 +67,17 @@ $this->title = 'Project Signal';
   background-color: #2479a9;
 
 }
-
+.navbar-inverse{
+    padding-right: 0px;
+  padding-left: 0px;
+background-color: white;
+border-color: #1048ae;
+}
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus{
   color: #fff;
   background-color: #1048ae;
 }
 .container-fluid{
-  padding-right: 0px;
-  padding-left: 0px;
 }
 
 .container-fluid>.navbar-header{
@@ -89,8 +92,7 @@ $this->title = 'Project Signal';
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
 <nav class="navbar navbar-inverse navbar-fixed-top" id="nav">
-  <div class="container-fluid">
-    <div class="navbar-header">
+     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -107,7 +109,6 @@ $this->title = 'Project Signal';
           <li><a href="#section4">Papers</a></li>
         </ul>
       </div>
-    </div>
   </div>
 </nav>
 
