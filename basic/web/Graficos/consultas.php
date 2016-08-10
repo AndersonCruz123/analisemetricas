@@ -2,7 +2,7 @@
 <?php
   try{
       #Conexão com MySQL via PDO_MYSQL
-      $DBH = new PDO("mysql:host=localhost;dbname=francelina-dantas-turma7", "smarcos", "password");
+      $DBH = new PDO("mysql:host=localhost;dbname=francelina-dantas-turma7", "root", "");
   }catch (PDOException $e) { 
       echo $e->getMessage();
   }
@@ -10,92 +10,81 @@
   //mysql_select_db('francelina-dantas-turma7',$conexao);
 
   function ss_turma(){ //RETORNA OS ALUNOS DA TURMA 1
-      try{
-      #Conexão com MySQL via PDO_MYSQL
-        $DBH = new PDO("mysql:host=localhost;dbname=francelina-dantas-turma7", "smarcos", "password");
-      }catch (PDOException $e) { 
-        echo $e->getMessage();
+      global $DBH;
+      $ss_turma = $DBH->query("SELECT SS_USUARIO_TURMA_AULA.idTurma, SS_USUARIO.nome, SS_USUARIO.idUsuario FROM `SS_USUARIO` INNER join `SS_USUARIO_TURMA_AULA` ON SS_USUARIO.idUsuario LIKE SS_USUARIO_TURMA_AULA.idUsuario WHERE SS_USUARIO_TURMA_AULA.idTurma = 1 AND SS_USUARIO.IdUsuarioTipo = 3") or die ("Error: ".$ss_turma->errorInfo());
+
+      //$ss_turma = mysql_query($sql_turma) or die ("Erro turma: " . mysql_error());
+      $aluno = array(array());
+      $i = 0;
+
+      while ($linha = $ss_turma->fetch(PDO::FETCH_OBJ)){
+          $aluno[$i][0] = $linha-> idUsuario;
+          $aluno[$i][1] = $linha-> nome;
+          //$aluno[$i][0]."|".$aluno[$i][1]."<br>";
+          $i++;
+
       }
-  	 $ss_turma = $DBH->query("SELECT SS_USUARIO_TURMA_AULA.idTurma, SS_USUARIO.nome, SS_USUARIO.idUsuario FROM `SS_USUARIO` INNER join `SS_USUARIO_TURMA_AULA` ON SS_USUARIO.idUsuario LIKE SS_USUARIO_TURMA_AULA.idUsuario WHERE SS_USUARIO_TURMA_AULA.idTurma = 1 AND SS_USUARIO.IdUsuarioTipo = 3") or die ("Error: ".$ss_turma->errorInfo());
-
-  	//$ss_turma = mysql_query($sql_turma) or die ("Erro turma: " . mysql_error());
-
-  	$aluno = array(array());
-  	$i = 0;
-  	while ($linha = $ss_turma->fetch(PDO::FETCH_OBJ)){
-    	$aluno[$i][0] = $linha-> idUsuario;
-    	$aluno[$i][1] = $linha-> nome;
-    	//$aluno[$i][0]."|".$aluno[$i][1]."<br>";
-    	$i++;
-
-    }
-    return $aluno;
+      return $aluno;
   }
-  function ss_turma_professor(){ //RETORNA O PROFESSOR DA TURMA 1;
-  	$ss_turma = $DBH->query("SELECT SS_USUARIO_TURMA_AULA.idTurma, SS_USUARIO.nome, SS_USUARIO.idUsuario FROM `SS_USUARIO` INNER join `SS_USUARIO_TURMA_AULA` ON SS_USUARIO.idUsuario LIKE SS_USUARIO_TURMA_AULA.idUsuario WHERE SS_USUARIO_TURMA_AULA.idTurma = 1 AND SS_USUARIO.IdUsuarioTipo = 2") or die ("Error: ".$ss_turma->errorInfo());
 
-  	//$ss_turma = mysql_query($sql_turma) or die ("Erro turma: " . mysql_error());
-  	
-  	$aluno = array(array());
-  	$i = 0;
-  	while ($linha = $ss_turma->fetch(PDO::FETCH_OBJ)){
-    	$aluno[$i][0] = $linha-> idUsuario;
-    	$aluno[$i][1] = $linha-> nome;
-    	$i++;
-    }
-    return $aluno;
+  function ss_turma_professor(){ //RETORNA O PROFESSOR DA TURMA 1;
+      global $DBH;
+      $ss_turma = $DBH->query("SELECT SS_USUARIO_TURMA_AULA.idTurma, SS_USUARIO.nome, SS_USUARIO.idUsuario FROM `SS_USUARIO` INNER join `SS_USUARIO_TURMA_AULA` ON SS_USUARIO.idUsuario LIKE SS_USUARIO_TURMA_AULA.idUsuario WHERE SS_USUARIO_TURMA_AULA.idTurma = 1 AND SS_USUARIO.IdUsuarioTipo = 2") or die ("Error: ".$ss_turma->errorInfo());
+
+      //$ss_turma = mysql_query($sql_turma) or die ("Erro turma: " . mysql_error());
+
+      $aluno = array(array());
+      $i = 0;
+      while ($linha = $ss_turma->fetch(PDO::FETCH_OBJ)){
+          $aluno[$i][0] = $linha-> idUsuario;
+          $aluno[$i][1] = $linha-> nome;
+          $i++;
+      }
+      return $aluno;
   }
 
   function nQuestion(){ //RETORNA O NUMERO DE QUESTOES DE PRIMEIRA ETAPA;
-  	$sql_contQ = $DBH->query('SELECT count(idRecurso) as cont 
+      global $DBH;
+      $sql_contQ = $DBH->query('SELECT count(idRecurso) as cont 
                 FROM SS_QUESTIONARIO_QUESTAO 
                     WHERE idRecurso LIKE "41"') or die ("Error: ".$sql_contQ);
-    //$Nq = mysql_query($sql_contQ) or die ("Erro ".mysql_error());
-    $linha = $sql_contQ->fetch(PDO::FETCH_OBJ);//mysql_fetch_object($Nq);
-  	return $linha->cont;
+      //$Nq = mysql_query($sql_contQ) or die ("Erro ".mysql_error());
+
+      $linha = $sql_contQ->fetch(PDO::FETCH_OBJ);//mysql_fetch_object($Nq);
+      return $linha->cont;
   }
 
   function parametros($id){   	//SELECIONA OS PARAMETROS NECESSARIOS PARA O CALCULO DA METRICA E OS RETORNA;
-    try{
-      #Conexão com MySQL via PDO_MYSQL
-        $DBH = new PDO("mysql:host=localhost;dbname=francelina-dantas-turma7", "smarcos", "password");
-      }catch (PDOException $e) { 
-        echo $e->getMessage();
-      }
+      global $DBH;
 
-    $resultado = $DBH->query('SELECT SS_EVENTO.nome,SS_EVENTO.timestamp, SS_EVENTO.parametros
+      $resultado = $DBH->query('SELECT SS_EVENTO.nome,SS_EVENTO.timestamp, SS_EVENTO.parametros
               FROM SS_EVENTO
               INNER join SS_USUARIO 
               ON  SS_USUARIO.idUsuario LIKE SS_EVENTO.idUsuario
 
               WHERE SS_USUARIO.idUsuario LIKE '.$id.' and (SS_EVENTO.nome LIKE "assessQuestionSelect" or SS_EVENTO.nome LIKE "assessQuestionAnswer")') or die("Error: ".$resultado);
 
-    //$resultado = mysql_query($sql) or die ("Erro: " . mysql_error());
+      //$resultado = mysql_query($sql) or die ("Erro: " . mysql_error());
 
-    $parametros =[];
-    $i = 0;
-    while ($linha = $resultado->fetch(PDO::FETCH_OBJ)){//
-        $parametros[$i] = $linha->parametros;
-      	$i++;
-    }
-    return $parametros;
+      $parametros =[];
+      $i = 0;
+      while ($linha = $resultado->fetch(PDO::FETCH_OBJ)){//
+          $parametros[$i] = $linha->parametros;
+          $i++;
+      }
+      return $parametros;
   }
-  function timestamp($id){
-    try{
-      #Conexão com MySQL via PDO_MYSQL
-        $DBH = new PDO("mysql:host=localhost;dbname=francelina-dantas-turma7", "smarcos", "password");
-      }catch (PDOException $e) { 
-        echo $e->getMessage();
-      }
 
-    $resultado = $DBH->query('SELECT SS_EVENTO.nome,SS_EVENTO.timestamp, SS_EVENTO.parametros
+  function timestamp($id){
+      global $DBH;
+      $resultado = $DBH->query('SELECT SS_EVENTO.nome,SS_EVENTO.timestamp, SS_EVENTO.parametros
               FROM SS_EVENTO
               INNER join SS_USUARIO 
               ON  SS_USUARIO.idUsuario LIKE SS_EVENTO.idUsuario
 
               WHERE SS_USUARIO.idUsuario LIKE '.$id.' and (SS_EVENTO.nome LIKE "assessQuestionSelect" or SS_EVENTO.nome LIKE "assessQuestionAnswer")') or die("Error: ".$resultado);
 
-    //$resultado = mysql_query($sql) or die ("Erro: " . mysql_error());
+      //$resultado = mysql_query($sql) or die ("Erro: " . mysql_error());
 
     $timestamp =[];
     $parametros = [];
@@ -123,13 +112,8 @@
     return $timestamp;
   }
   function timestamp_question($id){
-    try{
-      #Conexão com MySQL via PDO_MYSQL
-        $DBH = new PDO("mysql:host=localhost;dbname=francelina-dantas-turma7", "smarcos", "password");
-      }catch (PDOException $e) { 
-        echo $e->getMessage();
-      }
-    $resultado = $DBH->query('SELECT SS_EVENTO.nome,SS_EVENTO.timestamp, SS_EVENTO.parametros
+      global $DBH;
+      $resultado = $DBH->query('SELECT SS_EVENTO.nome,SS_EVENTO.timestamp, SS_EVENTO.parametros
               FROM SS_EVENTO
               INNER join SS_USUARIO 
               ON  SS_USUARIO.idUsuario LIKE SS_EVENTO.idUsuario

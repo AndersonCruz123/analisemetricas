@@ -3,7 +3,7 @@
 <?php
   try{
       #Conexão com MySQL via PDO_MYSQL
-      $DBH = new PDO("mysql:host=localhost;dbname=francelina-dantas-turma7", "smarcos", "password");
+      $DBH = new PDO("mysql:host=localhost;dbname=francelina-dantas-turma7", "root", "");
   }catch (PDOException $e) { 
       echo $e->getMessage();
   }
